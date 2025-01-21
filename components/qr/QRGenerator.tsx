@@ -204,37 +204,6 @@ export default function QRGenerator() {
     document.body.removeChild(link)
   }
 
-  const shareQRCode = async () => {
-    if (!qrCodeUrl) return
-    
-    try {
-      const blob = await fetch(qrCodeUrl).then(res => res.blob())
-      
-      // Check if Web Share API supports sharing files
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'qr-code.png')] })) {
-        await navigator.share({
-          files: [new File([blob], 'qr-code.png')],
-          title: 'QR Code',
-          text: 'Check out this QR code'
-        })
-      } else {
-        // Fallback to clipboard
-        await navigator.clipboard.writeText(inputValue)
-        alert('Content copied to clipboard!')
-      }
-    } catch (error) {
-      console.error('Error sharing:', error)
-      // Fallback if sharing fails
-      try {
-        await navigator.clipboard.writeText(inputValue)
-        alert('Content copied to clipboard!')
-      } catch (fallbackError) {
-        console.error('Fallback error:', fallbackError)
-        alert('Could not share or copy content')
-      }
-    }
-  }
-
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -317,7 +286,6 @@ export default function QRGenerator() {
             qrCodeUrl={qrCodeUrl}
             inputValue={inputValue}
             onDownload={downloadQRCode}
-            onShare={shareQRCode}
           />
         </motion.div>
       )}

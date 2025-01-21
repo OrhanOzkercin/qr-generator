@@ -35,7 +35,7 @@ export default function Home() {
         </p>
         <p className="mt-1 flex items-center justify-center gap-1">
           <a 
-            href="https://github.com/ozkercin/qrcode" 
+            href="https://github.com/OrhanOzkercin/qr-generator" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-indigo-500 hover:text-indigo-600 transition-colors flex items-center gap-1"
